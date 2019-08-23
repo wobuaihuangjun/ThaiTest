@@ -1,0 +1,7 @@
+<resources>
+    <!--2560x1440的手机，实际分辨率是2392x1440-->
+
+
+    <string name="screen_resolution">adjust resolution：2390x1440</string>
+
+</resources>

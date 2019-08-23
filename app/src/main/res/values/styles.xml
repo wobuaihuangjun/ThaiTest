@@ -1,0 +1,62 @@
+<resources>
+
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowBackground">@android:color/white</item>-->
+<!--    </style>-->
+
+    <style name="SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+<!--    <style name="theme.u17.splash" parent="@style/AppBaseTheme">-->
+<!--        <item name="android:windowBackground">@drawable/bg_launcher_splash</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+
+<!--    </style>-->
+<!--    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="android:textColorPrimary">@color/textColorPrimary</item>-->
+<!--        <item name="android:windowBackground">@color/white</item>-->
+<!--        <item name="actionBarTheme">@style/style.u17.actionbar</item>-->
+<!--        <item name="actionMenuTextColor">@color/white</item>-->
+<!--        <item name="actionModeBackground">@drawable/bg_actionmode</item>-->
+<!--        <item name="actionModeCloseDrawable">@drawable/ic_close_white</item>-->
+<!--        <item name="actionModeStyle">@style/style.u17.actionmode</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+<!--        <item name="colorControlActivated">@color/colorControlActivated</item>-->
+<!--        <item name="colorControlNormal">@color/border_color_e3e3e3</item>-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="windowActionModeOverlay">true</item>-->
+<!--    </style>-->
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="list_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+    </style>
+
+    <style name="LabelButton" parent="@style/Base.Widget.AppCompat.Button.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">@dimen/dimen_text_size_18</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+</resources>

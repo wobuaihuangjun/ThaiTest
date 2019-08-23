@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MyTest</string>
+
+    <string name="test_collection">test_collection</string>
+    <string name="test_handler">test_handler</string>
+    <string name="test_rxjava">test_rxjava</string>
+    <string name="test_view">test_view</string>
+    <string name="test_thread">test_thread</string>
+    <string name="test_voice">test_voice</string>
+    <string name="test_screen">test_screen</string>
+    <string name="test_webView">test_webView</string>
+    <string name="test_service">test_service</string>
+    <string name="test_store">test_store</string>
+    <string name="test_kotlin">test_kotlin</string>
+    <string name="test_device">DeviceActivity</string>
+
+
+    <string name="screen_resolution">adjust resolution：default</string>
+</resources>

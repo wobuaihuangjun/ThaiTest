@@ -5,6 +5,9 @@ import com.xtc.libthai.CRF.CRFModel;
 import com.xtc.libthai.Config;
 
 public class StaticThaigCRFModel {
+
+    private static final String TAG = "StaticThaigCRFModel: ";
+
     private static String thCRFWordSegmentModelFile;
     public static CRFModel crfThaiWordSegmentModel;
 
@@ -17,10 +20,10 @@ public class StaticThaigCRFModel {
         long start = System.currentTimeMillis();
         crfThaiWordSegmentModel = CRFModel.loadCRFModel(thCRFWordSegmentModelFile);
         if (crfThaiWordSegmentModel == null) {
-            System.out.println("加载泰语CRF模型：" + thCRFWordSegmentModelFile + " 失败，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println(TAG + "加载泰语CRF模型：" + thCRFWordSegmentModelFile + " 失败，耗时 " + (System.currentTimeMillis() - start) + " ms");
             System.exit(-1);
         } else {
-            System.out.println("加载泰语CRF模型：" + thCRFWordSegmentModelFile + " 成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println(TAG + "加载泰语CRF模型：" + thCRFWordSegmentModelFile + " 成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
         }
 
     }

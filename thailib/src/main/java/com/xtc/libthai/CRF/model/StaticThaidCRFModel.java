@@ -5,6 +5,9 @@ import com.xtc.libthai.CRF.CRFModel;
 import com.xtc.libthai.Config;
 
 public class StaticThaidCRFModel {
+
+    private static final String TAG = "StaticThaidCRFModel: ";
+
     private static String thSyllableSegmentModelFile;
     private static String thSyllableMergeModelFile;
     public static CRFModel crfThaiSyllableSegmentModel;
@@ -21,9 +24,9 @@ public class StaticThaidCRFModel {
         crfThaiSyllableSegmentModel = CRFModel.loadCRFModel(thSyllableSegmentModelFile);
         crfThaiSyllableMergeModel = CRFModel.loadCRFModel(thSyllableMergeModelFile);
         if (crfThaiSyllableSegmentModel != null && crfThaiSyllableMergeModel != null) {
-            System.out.println("加载泰语CRF模型：" + thSyllableSegmentModelFile + "\n" + thSyllableMergeModelFile + " 成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println(TAG + "加载泰语CRF模型：" + thSyllableSegmentModelFile + "\n" + thSyllableMergeModelFile + " 成功，耗时 " + (System.currentTimeMillis() - start) + " ms");
         } else {
-            System.out.println("加载泰语CRF模型：" + thSyllableSegmentModelFile + "\n" + thSyllableMergeModelFile + " 失败，耗时 " + (System.currentTimeMillis() - start) + " ms");
+            System.out.println(TAG + "加载泰语CRF模型：" + thSyllableSegmentModelFile + "\n" + thSyllableMergeModelFile + " 失败，耗时 " + (System.currentTimeMillis() - start) + " ms");
             System.exit(-1);
         }
 

@@ -39,7 +39,8 @@ public class Config {
     }
 
     public static final class DictConf {
-        public static String dictionaryPath = "/cn/edu/kmust/seanlp/dictionary/";
+        public static String dictionaryPath = "/com/xtc/libthai/dictionary/";
+
         public static String commonDictionary = "/CommonDictionary";
         public static String coreDictionary = "/CoreDictionary";
         public static String natureTransitionMatrix = "/NatureTransitionMatrix";

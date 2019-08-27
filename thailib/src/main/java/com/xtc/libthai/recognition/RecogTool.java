@@ -12,7 +12,12 @@ public class RecogTool {
     }
 
     public static boolean recog(String text, int offset, int count) {
-        return isNumber(text, offset, count) || isEnglish(text, offset, count) || isThaiDigit(text, offset, count) || isLaoDigit(text, offset, count) || isKhmerDigit(text, offset, count) || isMyanmarDigit(text, offset, count);
+        return isNumber(text, offset, count)
+                || isEnglish(text, offset, count)
+                || isThaiDigit(text, offset, count)
+                || isLaoDigit(text, offset, count)
+                || isKhmerDigit(text, offset, count)
+                || isMyanmarDigit(text, offset, count);
     }
 
     public static boolean isDigit(char c) {

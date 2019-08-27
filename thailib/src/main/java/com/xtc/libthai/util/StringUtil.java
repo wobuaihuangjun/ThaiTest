@@ -15,6 +15,9 @@ public class StringUtil {
     public StringUtil() {
     }
 
+    /**
+     * 将数组转换为String
+     */
     public static String merge(String[] strArray, int offset, int count) {
         if (offset < 0) {
             throw new StringIndexOutOfBoundsException(offset);
@@ -23,7 +26,7 @@ public class StringUtil {
         } else if (offset > strArray.length - count) {
             throw new StringIndexOutOfBoundsException(offset + count);
         } else {
-            return toString((String[])Arrays.copyOfRange(strArray, offset, offset + count));
+            return toString(Arrays.copyOfRange(strArray, offset, offset + count));
         }
     }
 
@@ -35,7 +38,7 @@ public class StringUtil {
         } else if (offset > strArray.length - count) {
             throw new StringIndexOutOfBoundsException(offset + count);
         } else {
-            return getViWord((String[])Arrays.copyOfRange(strArray, offset, offset + count));
+            return getViWord(Arrays.copyOfRange(strArray, offset, offset + count));
         }
     }
 

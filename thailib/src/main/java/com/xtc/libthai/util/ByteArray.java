@@ -6,8 +6,8 @@ import com.xtc.libthai.Config;
 import java.io.InputStream;
 
 public class ByteArray {
-    byte[] bytes;
-    int offset;
+    private byte[] bytes;
+    private int offset;
 
     public ByteArray(byte[] bytes) {
         this.bytes = bytes;

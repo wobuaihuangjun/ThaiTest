@@ -10,7 +10,7 @@ import com.xtc.libthai.segmenter.matcher.Matcher;
 import com.xtc.libthai.segmenter.matcher.MaximumMatcher;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 
 public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
@@ -24,6 +24,7 @@ public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
 
     protected List<Term> segment(String[] strs) {
         List<Term> ret = this.maxMatcher.segment(strs);
+//        System.out.println("14: " + ret);
         if (Config.BaseConf.speechTagging) {
             ret = this.pos.speechTagging(ret);
         }
@@ -36,7 +37,16 @@ public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
         int len = sentences.length;
 
         for(int i = 0; i < len; ++i) {
-            terms.addAll(this.segment(this.toTCC(sentences[i])));
+            String string = sentences[i];
+//            System.out.println("11: " + string);
+
+            String[] d = this.toTCC(string);
+//            System.out.println("12: " +  Arrays.toString(d));
+
+            List<Term> a = this.segment(d);
+//            System.out.println("13: " + a);
+
+            terms.addAll(a);
         }
 
         return terms;

@@ -2,8 +2,17 @@ package com.xtc.libthai.util;
 
 import java.io.DataOutputStream;
 
+/**
+ * 可写入或读取二进制
+ */
 public interface ICacheAble {
-    void save(DataOutputStream var1) throws Exception;
+    /**
+     * 写入
+     */
+    void save(DataOutputStream out) throws Exception;
 
-    boolean load(ByteArray var1);
+    /**
+     * 加载
+     */
+    boolean load(ByteArray byteArray);
 }

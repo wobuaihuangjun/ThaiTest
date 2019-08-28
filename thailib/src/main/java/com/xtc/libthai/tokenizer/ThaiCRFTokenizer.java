@@ -1,26 +1,38 @@
 package com.xtc.libthai.tokenizer;
 
-import com.xtc.libthai.segmenter.domain.Term;
 import com.xtc.libthai.segmenter.CRF.ThaiCRFSegmenter;
 import com.xtc.libthai.segmenter.ThaiSegmenter;
+import com.xtc.libthai.segmenter.domain.Term;
 
 import java.util.List;
 
+/**
+ * 泰语CRF分词器
+ */
 public class ThaiCRFTokenizer {
 
-    public static final ThaiSegmenter crfThaiSegment = new ThaiCRFSegmenter();
+    /**
+     * 预置分词器
+     */
+    public final static ThaiSegmenter crfThaiSegment = new ThaiCRFSegmenter();
 
-    public ThaiCRFTokenizer() {
-    }
-
+    /**
+     * 层叠CRF分词
+     */
     public static List<Term> segment(String text) {
         return crfThaiSegment.segment(text);
     }
 
+    /**
+     * 单层CRF分词
+     */
     public static List<Term> gCRFSegment(String text) {
         return crfThaiSegment.gCRFWordSegment(text);
     }
 
+    /**
+     * CRF音节切分
+     */
     public static String syllableSegment(String text) {
         return crfThaiSegment.syllableSegment(text);
     }

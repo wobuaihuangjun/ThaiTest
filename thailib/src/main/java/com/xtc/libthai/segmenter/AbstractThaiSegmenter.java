@@ -45,17 +45,17 @@ public abstract class AbstractThaiSegmenter extends AbstractSegmenter implements
     }
 
     protected List<Term> sentenceMerge(String[] sentences) {
-        List<Term> termList = new LinkedList();
+        List<Term> termList = new LinkedList<>();
         int len = sentences.length;
 
         for(int i = 0; i < len; ++i) {
-            termList.addAll(this.segmentSentence(sentences[i]));
+            termList.addAll(segmentSentence(sentences[i]));
         }
 
         return termList;
     }
 
     public List<Term> segment(String text) {
-        return this.sentenceMerge(this.sentenceSegment(text));
+        return this.sentenceMerge(sentenceSegment(text));
     }
 }

@@ -53,26 +53,34 @@ public class JavaDomain {
 //    แพ|็คเกจ|โทร|ที่|สมัคร|ไว้|สามารถ|โทร|หา|2|&#|8211|;|Short|Number|6|หลัก|เพื่อ|โทรศัพท์|.|
 
     public static void main(String[] args) {
-        SeanlpThai.setIsDebug(true);
-
 //        testThai(text[0]);
 //        System.out.println();
 
-        System.out.println(text[0]);
-        System.out.println(SeanlpThai.maxSegment(text[0]));
+        SeanlpThai.customMaxSegment("คุณสามารถดำเนินการHandleในการจัดลับดับรายชื่อ");
 
+//        System.out.println("กรุณารอ");
+//        System.out.println("      maxSegment: " + SeanlpThai.maxSegment("กรุณารอ"));
+//        System.out.println("customMaxSegment: " + SeanlpThai.customMaxSegment("กรุณารอ"));
 //        for (String value : text) {
 //            syllableSegmentTest(value);
 //        }
 
-//        for (String s : text) {
-//            maxSegmentTest(s);
-//        }
+        for (String s : text) {
+            maxSegmentTest(s);
+        }
     }
 
     private static void maxSegmentTest(String thText) {
         System.out.println(thText);
-        System.out.println(SeanlpThai.maxSegment(thText));
+
+        long start = System.currentTimeMillis();
+        String result = SeanlpThai.maxSegment(thText);
+        System.out.println("      maxSegment: " + result + "time cost1: " + (System.currentTimeMillis() - start));
+
+        start = System.currentTimeMillis();
+        result = SeanlpThai.customMaxSegment(thText);
+        System.out.println("customMaxSegment: " + result + "time cost2: " + (System.currentTimeMillis() - start));
+
         System.out.println();
     }
 

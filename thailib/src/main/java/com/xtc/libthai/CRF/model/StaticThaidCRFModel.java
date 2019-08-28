@@ -1,9 +1,11 @@
 package com.xtc.libthai.CRF.model;
 
-
 import com.xtc.libthai.CRF.CRFModel;
 import com.xtc.libthai.Config;
 
+/**
+ * 泰语静态CRF分词模型
+ */
 public class StaticThaidCRFModel {
 
     private static final String TAG = "StaticThaidCRFModel: ";

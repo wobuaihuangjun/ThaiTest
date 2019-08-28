@@ -22,7 +22,7 @@ public class NatureTransitionMatrix<E extends Enum<E>> {
 
     public boolean load(String path) {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path + ".txt"), "UTF-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path + Config.FileExtensions.TXT), "UTF-8"));
             String line = br.readLine();
             String[] _param = line.split("\t");
             String[] labels = new String[_param.length - 1];

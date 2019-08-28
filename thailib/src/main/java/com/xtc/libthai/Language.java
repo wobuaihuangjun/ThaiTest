@@ -1,13 +1,41 @@
 package com.xtc.libthai;
 
+/**
+ * 语言
+ */
 public enum Language {
+
+    /**
+     * 泰语
+     */
     Thai("th"),
+    /**
+     * 越南语
+     */
     Vietnamese("vi"),
+    /**
+     * 柬埔寨语
+     */
     Khmer("km"),
+    /**
+     * 老挝语
+     */
     Lao("lo"),
+    /**
+     * 缅甸语
+     */
     Burmese("bu"),
+    /**
+     * 缅甸语
+     */
     Myanmar("my"),
+    /**
+     * 汉语
+     */
     Chinese("zh"),
+    /**
+     * 英语
+     */
     English("en");
 
     private String label;
@@ -19,4 +47,5 @@ public enum Language {
     public String getLabel() {
         return this.label;
     }
+
 }

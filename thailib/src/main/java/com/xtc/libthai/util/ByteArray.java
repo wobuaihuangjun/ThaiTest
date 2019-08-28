@@ -5,167 +5,209 @@ import com.xtc.libthai.Config;
 
 import java.io.InputStream;
 
+
+/**
+ * 对字节数组进行封装，提供方便的读取操作
+ */
 public class ByteArray {
-    private byte[] bytes;
-    private int offset;
+    byte[] bytes;
+    int offset;
 
     public ByteArray(byte[] bytes) {
         this.bytes = bytes;
     }
 
+    /**
+     * 从文件读取一个字节数组
+     *
+     * @param path
+     * @return
+     */
     public static ByteArray createByteArray(String path) {
         InputStream is = IOUtil.getInputStream(path);
-        if (is == null) {
+        if (is == null)
             return null;
-        } else {
-            byte[] bytes = IOUtil.readBytes(is);
-            return bytes == null ? null : new ByteArray(bytes);
-        }
+        byte[] bytes = IOUtil.readBytes(is);
+        if (bytes == null)
+            return null;
+        return new ByteArray(bytes);
     }
 
+    /**
+     * 从gz文件读取一个字节数组
+     *
+     * @param path
+     * @return
+     */
     public static ByteArray createByteArrayByGz(String path) {
         InputStream is = IOUtil.getInputStream(path);
         byte[] bytes = IOUtil.readGzBytes(is);
-        return bytes == null ? null : new ByteArray(bytes);
+        if (bytes == null)
+            return null;
+        return new ByteArray(bytes);
     }
 
+    /**
+     * 获取全部字节
+     *
+     * @return
+     */
     public byte[] getBytes() {
-        return this.bytes;
+        return bytes;
     }
 
+    /**
+     * 读取一个int
+     *
+     * @return
+     */
     public int nextInt() {
-        int result = ByteUtil.bytesHighFirstToInt(this.bytes, this.offset);
-        this.offset += 4;
+        int result = ByteUtil.bytesHighFirstToInt(bytes, offset);
+        offset += 4;
         return result;
     }
 
     public double nextDouble() {
-        double result = ByteUtil.bytesHighFirstToDouble(this.bytes, this.offset);
-        this.offset += 8;
+        double result = ByteUtil.bytesHighFirstToDouble(bytes, offset);
+        offset += 8;
         return result;
     }
 
+    /**
+     * 读取一个char，对应于writeChar
+     *
+     * @return
+     */
     public char nextChar() {
-        char result = ByteUtil.bytesHighFirstToChar(this.bytes, this.offset);
-        this.offset += 2;
+        char result = ByteUtil.bytesHighFirstToChar(bytes, offset);
+        offset += 2;
         return result;
     }
 
+    /**
+     * 读取一个字节
+     *
+     * @return
+     */
     public byte nextByte() {
-        return this.bytes[this.offset++];
+        return bytes[offset++];
     }
 
     public boolean hasMore() {
-        return this.offset < this.bytes.length;
+        return offset < bytes.length;
     }
 
+    /**
+     * 读取一个String，注意这个String是双字节版的，在字符之前有一个整型表示长度
+     *
+     * @return
+     */
     public String nextString() {
         StringBuilder sb = new StringBuilder();
-        int length = this.nextInt();
-
-        for(int i = 0; i < length; ++i) {
-            sb.append(this.nextChar());
+        int length = nextInt();
+        for (int i = 0; i < length; ++i) {
+            sb.append(nextChar());
         }
-
         return sb.toString();
     }
 
     public float nextFloat() {
-        float result = ByteUtil.bytesHighFirstToFloat(this.bytes, this.offset);
-        this.offset += 4;
+        float result = ByteUtil.bytesHighFirstToFloat(bytes, offset);
+        offset += 4;
         return result;
     }
 
+    /**
+     * 读取一个无符号短整型
+     *
+     * @return
+     */
     public int nextUnsignedShort() {
-        byte a = this.nextByte();
-        byte b = this.nextByte();
-        return (a & 255) << 8 | b & 255;
+        byte a = nextByte();
+        byte b = nextByte();
+        return (((a & 0xff) << 8) | (b & 0xff));
     }
 
+    /**
+     * 读取一个UTF字符串
+     *
+     * @return
+     */
     public String nextUTF() {
-        int utflen = this.nextUnsignedShort();
-        byte[] bytearr = new byte[utflen];
-        char[] chararr = new char[utflen];
+        int utflen = nextUnsignedShort();
+        byte[] bytearr = null;
+        char[] chararr = null;
+        bytearr = new byte[utflen];
+        chararr = new char[utflen];
+
+        int c, char2, char3;
         int count = 0;
         int chararr_count = 0;
 
-        for(int i = 0; i < utflen; ++i) {
-            bytearr[i] = this.nextByte();
+        for (int i = 0; i < utflen; ++i) {
+            bytearr[i] = nextByte();
         }
 
-        int c;
-        while(count < utflen) {
-            c = bytearr[count] & 255;
-            if (c > 127) {
+        while (count < utflen) {
+            c = (int) bytearr[count] & 0xff;
+            if (c > 127)
                 break;
-            }
-
-            ++count;
-            chararr[chararr_count++] = (char)c;
+            count++;
+            chararr[chararr_count++] = (char) c;
         }
 
-        while(true) {
-            while(count < utflen) {
-                c = bytearr[count] & 255;
-                byte char2;
-                switch(c >> 4) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                        ++count;
-                        chararr[chararr_count++] = (char)c;
-                        break;
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                    default:
+        while (count < utflen) {
+            c = (int) bytearr[count] & 0xff;
+            switch (c >> 4) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    /* 0xxxxxxx */
+                    count++;
+                    chararr[chararr_count++] = (char) c;
+                    break;
+                case 12:
+                case 13:
+                    /* 110x xxxx 10xx xxxx */
+                    count += 2;
+                    if (count > utflen)
+                        Config.Log.logger.severe("malformed input: partial character at end");
+                    char2 = (int) bytearr[count - 1];
+                    if ((char2 & 0xC0) != 0x80)
                         Config.Log.logger.severe("malformed input around byte " + count);
-                        break;
-                    case 12:
-                    case 13:
-                        count += 2;
-                        if (count > utflen) {
-                            Config.Log.logger.severe("malformed input: partial character at end");
-                        }
-
-                        char2 = bytearr[count - 1];
-                        if ((char2 & 192) != 128) {
-                            Config.Log.logger.severe("malformed input around byte " + count);
-                        }
-
-                        chararr[chararr_count++] = (char)((c & 31) << 6 | char2 & 63);
-                        break;
-                    case 14:
-                        count += 3;
-                        if (count > utflen) {
-                            Config.Log.logger.severe("malformed input: partial character at end");
-                        }
-
-                        char2 = bytearr[count - 2];
-                        int char3 = bytearr[count - 1];
-                        if ((char2 & 192) != 128 || (char3 & 192) != 128) {
-                            Config.Log.logger.severe("malformed input around byte " + (count - 1));
-                        }
-
-                        chararr[chararr_count++] = (char)((c & 15) << 12 | (char2 & 63) << 6 | (char3 & 63) << 0);
-                }
+                    chararr[chararr_count++] = (char) (((c & 0x1F) << 6) | (char2 & 0x3F));
+                    break;
+                case 14:
+                    /* 1110 xxxx 10xx xxxx 10xx xxxx */
+                    count += 3;
+                    if (count > utflen)
+                        Config.Log.logger.severe("malformed input: partial character at end");
+                    char2 = (int) bytearr[count - 2];
+                    char3 = (int) bytearr[count - 1];
+                    if (((char2 & 0xC0) != 0x80) || ((char3 & 0xC0) != 0x80))
+                        Config.Log.logger.severe("malformed input around byte " + (count - 1));
+                    chararr[chararr_count++] = (char) (((c & 0x0F) << 12)
+                            | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));
+                    break;
+                default:
+                    /* 10xx xxxx, 1111 xxxx */
+                    Config.Log.logger.severe("malformed input around byte " + count);
             }
-
-            return new String(chararr, 0, chararr_count);
         }
+        // The number of chars produced may be less than utflen
+        return new String(chararr, 0, chararr_count);
     }
 
     public int getOffset() {
-        return this.offset;
+        return offset;
     }
 
     public int getLength() {
-        return this.bytes.length;
+        return bytes.length;
     }
 }

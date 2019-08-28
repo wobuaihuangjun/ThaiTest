@@ -10,9 +10,12 @@ import com.xtc.libthai.segmenter.matcher.Matcher;
 import com.xtc.libthai.segmenter.matcher.MaximumMatcher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 泰语正向最大匹配算法分词
+ *
+ */
 public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
     private Matcher maxMatcher;
     private POS pos;
@@ -22,28 +25,19 @@ public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
         this.pos = new ThaiPOS();
     }
 
-    protected List<Term> segment(String[] strs) {
-        List<Term> ret = this.maxMatcher.segment(strs);
-//        System.out.println("14: " + ret);
-        if (Config.BaseConf.speechTagging) {
-            ret = this.pos.speechTagging(ret);
-        }
-
-        return ret;
-    }
-
+    @Override
     protected List<Term> sentenceMerge(String[] sentences) {
-        List<Term> terms = new ArrayList();
+        List<Term> terms = new ArrayList<>();
         int len = sentences.length;
 
         for(int i = 0; i < len; ++i) {
             String string = sentences[i];
 //            System.out.println("11: " + string);
 
-            String[] d = this.toTCC(string);
+            String[] d = toTCC(string);
 //            System.out.println("12: " +  Arrays.toString(d));
 
-            List<Term> a = this.segment(d);
+            List<Term> a = segment(d);
 //            System.out.println("13: " + a);
 
             terms.addAll(a);
@@ -52,17 +46,29 @@ public class ThaiMaxMatchSegmenter extends AbstractThaiSegmenter {
         return terms;
     }
 
-    protected List<Term> segment(char[] chars) {
-        List<Term> ret = this.maxMatcher.segment(chars);
+    @Override
+    protected List<Term> segment(String[] strs) {
+        List<Term> ret = maxMatcher.segment(strs);
+//        System.out.println("14: " + ret);
         if (Config.BaseConf.speechTagging) {
-            ret = this.pos.speechTagging(ret);
+            ret = pos.speechTagging(ret);
         }
 
         return ret;
     }
 
+    @Override
+    protected List<Term> segment(char[] chars) {
+        List<Term> ret = maxMatcher.segment(chars);
+        if (Config.BaseConf.speechTagging) {
+            ret = pos.speechTagging(ret);
+        }
+        return ret;
+    }
+
+    @Override
     public List<Term> segment(String text) {
-        return this.sentenceMerge(this.sentenceSegment(text));
+        return sentenceMerge(sentenceSegment(text));
     }
 
     public static void main(String[] args) {

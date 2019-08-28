@@ -18,6 +18,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeMap;
 
+/**
+ * 使用DoubleArrayTrie实现的核心词典
+ */
 public class CoreDictionary implements Dictionary<CoreDictionary> {
 
     private static final String TAG = "CoreDictionary: ";
@@ -25,16 +28,11 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
     public static int totalFrequency = 221894;
     public DATrie<Attribute> dictionaryTrie;
 
-    public CoreDictionary() {
-    }
-
     public static CoreDictionary loadTxtDictionary(String path) {
-        System.out.println(TAG + "loadTxtDictionary");
-
         CoreDictionary coreDictionary = new CoreDictionary();
         TreeMap<String, Attribute> map = new TreeMap<>();
         BufferedReader br = null;
-        InputStream inputStream = IOUtil.getInputStream(path + ".txt");
+        InputStream inputStream = IOUtil.getInputStream(path + Config.FileExtensions.TXT);
         if (inputStream == null) {
             return null;
         }
@@ -43,11 +41,15 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
             int MAX_FREQUENCY = 0;
 
             String line;
-            long start;
+            long start = System.currentTimeMillis();
             CoreDictionary.Attribute attribute;
-            for (start = System.currentTimeMillis(); (line = br.readLine()) != null; MAX_FREQUENCY += attribute.totalFrequency) {
+            while ((line = br.readLine()) != null) {
+                System.out.println(TAG + "loadTxtDictionary, line:" + line);
+
+                //line结构：param[0] \t nature \t frequency \t nature \t frequency...
                 String[] param = line.split("\t");
                 int natureCount = (param.length - 1) / 2;
+                System.out.println(TAG + "loadTxtDictionary, natureCount:" + natureCount);
                 attribute = new CoreDictionary.Attribute(natureCount);
 
                 for (int i = 0; i < natureCount; ++i) {
@@ -57,14 +59,17 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
                 }
 
                 map.put(param[0], attribute);
+
+                MAX_FREQUENCY += attribute.totalFrequency;
             }
 
+            System.out.println(TAG + "核心词典读入词条" + map.size() + " 全部频次" + MAX_FREQUENCY + "，耗时" + (System.currentTimeMillis() - start) + "ms");
             Config.Log.logger.info("核心词典读入词条" + map.size() + " 全部频次" + MAX_FREQUENCY + "，耗时" + (System.currentTimeMillis() - start) + "ms");
             br.close();
-            coreDictionary.dictionaryTrie = new DATrie();
+            coreDictionary.dictionaryTrie = new DATrie<>();
             coreDictionary.dictionaryTrie.build(map);
             Config.Log.logger.info("核心词典加载成功:" + coreDictionary.dictionaryTrie.size() + "个词条，下面将写入缓存……");
-            String binName = System.getProperty("user.dir") + "/src/main/resources" + path + ".bin";
+            String binName = System.getProperty("user.dir") + "/src/main/resources" + path + Config.FileExtensions.BIN;
             if (Config.DEBUG) {
                 System.out.println(binName);
             }
@@ -104,9 +109,7 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
     }
 
     public static CoreDictionary loadBinDictionary(String path) {
-        System.out.println(TAG + "loadBinDictionary");
-
-        ByteArray byteArray = ByteArray.createByteArray(path + ".bin");
+        ByteArray byteArray = ByteArray.createByteArray(path + Config.FileExtensions.BIN);
         if (byteArray == null) {
             return null;
         } else {
@@ -115,6 +118,9 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
         }
     }
 
+    /**
+     * 从ByteArrays加载双数组
+     */
     public boolean loadDat(ByteArray byteArray) {
         this.dictionaryTrie = new DATrie<>();
         try {
@@ -124,18 +130,24 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
             Nature[] natureIndexArray = Nature.values();
 
             for (int i = 0; i < size; ++i) {
+                // 第一个是全部频次，第二个是词性个数
                 int currentTotalFrequency = byteArray.nextInt();
                 int length = byteArray.nextInt();
+//                System.out.println(TAG + "loadDat, currentTotalFrequency:" + currentTotalFrequency + ", length:" + length);
                 attributes[i] = new CoreDictionary.Attribute(length);
                 attributes[i].totalFrequency = currentTotalFrequency;
 
                 for (int j = 0; j < length; ++j) {
-                    attributes[i].nature[j] = natureIndexArray[byteArray.nextInt()];
-                    attributes[i].frequency[j] = byteArray.nextInt();
+                    int nature = byteArray.nextInt();
+                    int frequency = byteArray.nextInt();
+//                    System.out.println(TAG + "loadDat, nature:" + nature + ", frequency:" + frequency);
+
+                    attributes[i].nature[j] = natureIndexArray[nature];
+                    attributes[i].frequency[j] = frequency;
                 }
             }
 
-            if (this.dictionaryTrie.load(byteArray, attributes) && !byteArray.hasMore()) {
+            if (this.dictionaryTrie.loadString(byteArray, attributes) && !byteArray.hasMore()) {
                 return true;
             } else {
                 return false;
@@ -177,8 +189,17 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
         return loadTxtDictionary(path);
     }
 
+    /**
+     * 核心词典中的词属性
+     */
     public static class Attribute {
+        /**
+         * 词性列表
+         */
         public Nature[] nature;
+        /**
+         * 词性对应的词频
+         */
         public int[] frequency;
         public int totalFrequency;
 
@@ -205,6 +226,9 @@ public class CoreDictionary implements Dictionary<CoreDictionary> {
             this.totalFrequency = totalFrequency;
         }
 
+        /**
+         * 使用单个词性，默认词频1000构造
+         */
         public Attribute(Nature nature) {
             this(nature, 1000);
         }

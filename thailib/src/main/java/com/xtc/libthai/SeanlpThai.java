@@ -91,6 +91,14 @@ public class SeanlpThai {
         return toString(terms);
     }
 
+    public static String customMaxSegment(String text) {
+        List<Term> terms = ThaiMatchTokenizer.customMaxSegment(text);
+        if (isDebug()) {
+            System.out.println(terms);
+        }
+        return toString(terms);
+    }
+
     /**
      * 泰语正向最大分词
      *

@@ -4,14 +4,45 @@ import com.xtc.libthai.segmenter.domain.Term;
 
 import java.util.List;
 
+/**
+ * 泰语分词器接口
+ *
+ */
 public interface ThaiSegmenter extends Segmenter {
-    String syllableSegment(String var1);
 
-    List<Term> dCRFWordSegment(String var1);
+    /**
+     * 泰语音节切分接口
+     * @param sentence 带切分的句子
+     * @return String
+     */
+    String syllableSegment(String sentence);
 
-    List<Term> gCRFWordSegment(String var1);
+    /**
+     * 双层条件随机场泰语分词
+     * @param sentence 待分词的句子
+     * @return List<Term>
+     */
+    List<Term> dCRFWordSegment(String sentence);
 
-    List<Term> seg(String var1);
+    /**
+     * 单层条件随机场泰语分词
+     * @param sentence 待分词的句子
+     * @return List<Term>
+     */
+    List<Term> gCRFWordSegment(String sentence);
 
-    List<Term> segmentSentence(String var1);
+    /**
+     * 音节切分和分词同时完成
+     * @param text
+     * @return
+     */
+    List<Term> seg(String text);
+
+    /**
+     * 对句子进行分词
+     * @param sentence
+     * @return
+     */
+    public List<Term> segmentSentence(String sentence);
+
 }

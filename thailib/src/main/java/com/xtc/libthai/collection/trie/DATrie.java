@@ -13,16 +13,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.zip.GZIPOutputStream;
 
+/**
+ * 双数组Trie<br>
+ * 原始版本是KOMIYA Atsushi对Taku Kudo的 C++ 版 Double Array Trie的实现，https://github.com/komiya-atsushi/darts-java.git  <br>
+ * hankcs实现了一个Searcher结构<br>
+ * 这里基本没有做什么修改，只是加了几个接口实现
+ *
+ * @param <V>
+ */
 public class DATrie<V> implements ITrie {
+
+    private static final String TAG = "DATrie: ";
+
     private static final int UNIT_SIZE = 8;
     protected int[] check = null;
     protected int[] base = null;
     private boolean[] used = null;
+    /**
+     * base 和 check 的大小
+     */
     protected int size = 0;
     private int allocSize = 0;
     private List<String> key;
@@ -85,8 +100,8 @@ public class DATrie<V> implements ITrie {
 
         assert keys.size() > 0 : "键值个数为0！";
 
-        this.v = (V[]) values.toArray();
-        return this.build(keys, (int[])null, (int[])null, keys.size());
+        v = (V[]) values.toArray();
+        return build(keys, null, null, keys.size());
     }
 
     public int build(List<String> keys, V[] values) {
@@ -98,20 +113,30 @@ public class DATrie<V> implements ITrie {
         return this.build(keys, (int[])null, (int[])null, keys.size());
     }
 
+    /**
+     * 构建DAT
+     *
+     * @param entrySet 注意此entrySet一定要是字典序的！否则会失败
+     * @return
+     */
     public int build(Set<Entry<String, V>> entrySet) {
-        List<String> keyList = new ArrayList(entrySet.size());
-        List<V> valueList = new ArrayList(entrySet.size());
-        Iterator var4 = entrySet.iterator();
+        List<String> keyList = new ArrayList<>(entrySet.size());
+        List<V> valueList = new ArrayList<>(entrySet.size());
 
-        while(var4.hasNext()) {
-            Entry<String, V> entry = (Entry)var4.next();
+        for (Map.Entry<String, V> entry : entrySet) {
             keyList.add(entry.getKey());
             valueList.add(entry.getValue());
         }
 
-        return this.build(keyList, (List)valueList);
+        return build(keyList, valueList);
     }
 
+    /**
+     * 方便地构造一个双数组trie树
+     *
+     * @param keyValueMap 升序键值对map
+     * @return 构造结果
+     */
     public int build(TreeMap<String, V> keyValueMap) {
         assert keyValueMap != null;
 
@@ -119,48 +144,76 @@ public class DATrie<V> implements ITrie {
         return this.build(entrySet);
     }
 
+    /**
+     * 唯一的构建方法
+     *
+     * @param _key 值set，必须字典序
+     * @param _length 对应每个key的长度，留空动态获取
+     * @param _value 每个key对应的值，留空使用key的下标作为值
+     * @param _keySize key的长度，应该设为_key.size
+     * @return 是否出错
+     */
     public int build(List<String> _key, int[] _length, int[] _value, int _keySize) {
-        if (_keySize <= _key.size() && _key != null) {
-            this.key = _key;
-            this.length = _length;
-            this.keySize = _keySize;
-            this.value = _value;
-            this.progress = 0;
-            this.resize(2097152);
-            this.base[0] = 1;
-            this.nextCheckPos = 0;
-            DATrie.Node root_node = new DATrie.Node();
-            root_node.left = 0;
-            root_node.right = this.keySize;
-            root_node.depth = 0;
-            List<Node> siblings = new ArrayList();
-            this.fetch(root_node, siblings);
-            this.insert(siblings);
-            this.used = null;
-            this.key = null;
-            this.length = null;
-            return this.error;
-        } else {
+        if (_keySize > _key.size() || _key == null)
             return 0;
-        }
-    }
 
+        // progress_func_ = progress_func;
+        key = _key;
+        length = _length;
+        keySize = _keySize;
+        value = _value;
+        progress = 0;
+
+        resize(65536 * 32); // 32个双字节
+
+        base[0] = 1;
+        nextCheckPos = 0;
+
+        Node root_node = new Node();
+        root_node.left = 0;
+        root_node.right = keySize;
+        root_node.depth = 0;
+
+        List<Node> siblings = new ArrayList<>();
+        fetch(root_node, siblings);
+        insert(siblings);
+
+        // size += (1 << 8 * 2) + 1; // ???
+        // if (size >= allocSize) resize (size);
+
+        used = null;
+        key = null;
+        length = null;
+
+        return error;
+    }
+    /**
+     * 拓展数组
+     *
+     * @param newSize 新数组大小
+     * @return
+     */
     private int resize(int newSize) {
-        int[] newBbase = new int[newSize];
+        int[] newBase = new int[newSize];
         int[] newCheck = new int[newSize];
         boolean[] newUsed = new boolean[newSize];
-        if (this.allocSize > 0) {
-            System.arraycopy(this.base, 0, newBbase, 0, this.allocSize);
-            System.arraycopy(this.check, 0, newCheck, 0, this.allocSize);
-            System.arraycopy(this.used, 0, newUsed, 0, this.allocSize);
+        if (allocSize > 0) {
+            System.arraycopy(base, 0, newBase, 0, allocSize);
+            System.arraycopy(check, 0, newCheck, 0, allocSize);
+            System.arraycopy(used, 0, newUsed, 0, allocSize);
         }
-
-        this.base = newBbase;
-        this.check = newCheck;
-        this.used = newUsed;
-        return this.allocSize = newSize;
+        base = newBase;
+        check = newCheck;
+        used = newUsed;
+        return allocSize = newSize;
     }
-
+    /**
+     * 获取直接相连的子节点
+     *
+     * @param parent 父节点
+     * @param siblings （子）兄弟节点
+     * @return 兄弟节点个数
+     */
     private int fetch(DATrie.Node parent, List<Node> siblings) {
         if (this.error < 0) {
             return 0;
@@ -204,6 +257,12 @@ public class DATrie<V> implements ITrie {
         }
     }
 
+    /**
+     * 插入节点
+     *
+     * @param siblings 等待插入的兄弟节点
+     * @return 插入位置
+     */
     private int insert(List<Node> siblings) {
         if (this.error < 0) {
             return 0;
@@ -214,7 +273,7 @@ public class DATrie<V> implements ITrie {
             if (this.allocSize <= pos) {
                 this.resize(pos + 1);
             }
-
+            // 此循环体的目标是找出满足base[begin + a1...an] == 0的n个空闲空间,a1...an是siblings中的n个节点
             while(true) {
                 label91:
                 while(true) {
@@ -357,10 +416,15 @@ public class DATrie<V> implements ITrie {
     }
 
     public int exactMatchSearch(String key) {
-        return this.exactMatchSearch((String)key, 0, 0, 0);
+        return this.exactMatchSearch(key, 0, 0, 0);
     }
 
+    /**
+     * 关键字匹配搜索
+     * @return >0表示匹配成果；
+     */
     public int exactMatchSearch(String key, int pos, int len, int nodePos) {
+//        System.out.println("exactMatchSearch");
         if (len <= 0) {
             len = key.length();
         }
@@ -372,7 +436,8 @@ public class DATrie<V> implements ITrie {
         int result = -1;
         char[] keyChars = key.toCharArray();
         int b = this.base[nodePos];
-
+//        System.out.println("exactMatchSearch, len = " + len);
+//        System.out.println("exactMatchSearch, b = " + b);
         int n;
         for(n = pos; n < len; ++n) {
             int p = b + keyChars[n] + 1;
@@ -382,8 +447,9 @@ public class DATrie<V> implements ITrie {
 
             b = this.base[p];
         }
-
+//        System.out.println("exactMatchSearch, b = " + b);
         n = this.base[b];
+//        System.out.println("exactMatchSearch, n = " + n);
         if (b == this.check[b] && n < 0) {
             result = -n - 1;
         }
@@ -619,7 +685,9 @@ public class DATrie<V> implements ITrie {
     }
 
     public boolean contains(String key) {
-        return this.exactMatchSearch(key) >= 0;
+        int result = this.exactMatchSearch(key);
+//        System.out.println("contains, result = " + result);
+        return result >= 0;
     }
 
     public void clear() {
@@ -672,13 +740,36 @@ public class DATrie<V> implements ITrie {
         out.writeObject(this.check);
     }
 
-    public boolean load(ByteArray byteArray, V[] value) {
+    public boolean loadString(ByteArray byteArray, V[] value) {
         if (byteArray == null) {
             return false;
         } else {
             this.size = byteArray.nextInt();
             this.base = new int[this.size + '\uffff'];
             this.check = new int[this.size + '\uffff'];
+
+            System.out.println(TAG + "load, size: " + size);
+
+            for(int i = 0; i < this.size; ++i) {
+                this.base[i] = byteArray.nextInt();
+                this.check[i] = byteArray.nextInt();
+            }
+
+            this.v = value;
+            return true;
+        }
+    }
+
+
+    public boolean load(ByteArray byteArray, V[] value) {
+        if (byteArray == null) {
+            return false;
+        } else {
+            size = byteArray.nextInt();
+            base = new int[size + '\uffff'];
+            check = new int[size + '\uffff'];
+
+            System.out.println(TAG + "load, size: " + size);
 
             for(int i = 0; i < this.size; ++i) {
                 this.base[i] = byteArray.nextInt();

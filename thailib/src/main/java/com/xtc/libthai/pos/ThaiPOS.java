@@ -7,60 +7,53 @@ import com.xtc.libthai.dictionary.language.ThaiNatureTransMatrix;
 import com.xtc.libthai.segmenter.domain.Nature;
 import com.xtc.libthai.segmenter.domain.Term;
 import com.xtc.libthai.segmenter.domain.Vertex;
+import com.xtc.libthai.util.Predefine;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
+/**
+ * 泰语词性标注
+ *
+ * @author Zhao Shiyu
+ *
+ */
 public class ThaiPOS implements POS {
-    public ThaiPOS() {
-    }
 
+    /**
+     * 词性标注
+     * @param termList 分好词，待标注
+     * @return 标注结果
+     */
     public List<Term> speechTagging(List<Term> termList) {
-        List<Vertex> vertexList = this.toVertexList(termList, true);
+        List<Vertex> vertexList = toVertexList(termList, true);
         Viterbi.compute(vertexList, ThaiNatureTransMatrix.thaiTransMatrix);
         int i = 0;
-
-        for(Iterator var4 = termList.iterator(); var4.hasNext(); ++i) {
-            Term term = (Term)var4.next();
-            if (term.getNature() != null) {
-                term.setNature(((Vertex)vertexList.get(i + 1)).getNature());
-            } else {
-                term.setNature(Nature.UN);
-            }
+        for (Term term : termList) {
+            if (term.getNature() != null) term.setNature(vertexList.get(i + 1).getNature());
+            else term.setNature(Nature.UN);
+            ++i;
         }
-
         return termList;
     }
 
     public List<Vertex> toVertexList(List<Term> termList, boolean appendStart) {
-        ArrayList<Vertex> vertexList = new ArrayList(termList.size() + 1);
-        Vertex.B = new Vertex("始##始", " ", new CoreDictionary.Attribute(Nature.BEGIN, 262468), CoreDictionary.getWordID(ThaiCoreDictionary.thaiDictionary.dictionaryTrie, "始##始"));
-        if (appendStart) {
-            vertexList.add(Vertex.B);
-        }
-
-        Iterator var4 = termList.iterator();
-
-        while(var4.hasNext()) {
-            Term term = (Term)var4.next();
-            CoreDictionary.Attribute attribute = CoreDictionary.get(ThaiCoreDictionary.thaiDictionary.dictionaryTrie, term.getWord());
+        ArrayList<Vertex> vertexList = new ArrayList<Vertex>(termList.size() + 1);
+        //if (appendStart) vertexList.add(Vertex.B);
+        Vertex.B  =  new Vertex(Predefine.TAG_BIGIN, " ", new CoreDictionary.Attribute(Nature.BEGIN, Predefine.MAX_FREQUENCY / 10), CoreDictionary.getWordID(ThaiCoreDictionary.thaiDictionary.dictionaryTrie, Predefine.TAG_BIGIN));
+        if (appendStart) vertexList.add(Vertex.B);
+        for (Term term : termList) {
+            CoreDictionary.Attribute attribute = CoreDictionary.get(ThaiCoreDictionary.thaiDictionary.dictionaryTrie,term.getWord());
             if (attribute == null) {
-                if (term.getWord().trim().length() == 0) {
-                    attribute = new CoreDictionary.Attribute(Nature.PUNC);
-                } else {
-                    attribute = new CoreDictionary.Attribute(Nature.NPRP);
-                }
-            } else {
-                term.setNature(attribute.nature[0]);
+                if (term.getWord().trim().length() == 0) attribute = new CoreDictionary.Attribute(Nature.PUNC);
+                else attribute = new CoreDictionary.Attribute(Nature.NPRP);
             }
-
+            else term.setNature(attribute.nature[0]);;
             Vertex vertex = new Vertex(term.getWord(), attribute);
             vertexList.add(vertex);
         }
-
         return vertexList;
     }
-}
 
+}

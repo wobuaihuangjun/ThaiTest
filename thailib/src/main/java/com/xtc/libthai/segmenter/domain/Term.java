@@ -3,18 +3,44 @@ package com.xtc.libthai.segmenter.domain;
 
 import com.xtc.libthai.Config;
 
+/**
+ * 词（包括词、词性、长度和词的位置）
+ *
+ * @author  Zhao Shiyu
+ *
+ */
 public class Term {
+
+    /**
+     * 词
+     */
     private String word;
+
+    /**
+     * 词性
+     */
     private Nature nature;
+
+    /**
+     * 在文本中的位置（需开启分词器的offset选项）
+     */
     private int offset;
 
+    /**
+     * 构造一个词
+     *
+     * @param word
+     *            词语
+     * @param nature
+     *            词性
+     */
     public Term(String word, Nature nature) {
         this.word = word;
         this.nature = nature;
     }
 
     public String getWord() {
-        return this.word;
+        return word;
     }
 
     public void setWord(String word) {
@@ -22,7 +48,7 @@ public class Term {
     }
 
     public Nature getNature() {
-        return this.nature;
+        return nature;
     }
 
     public void setNature(Nature nature) {
@@ -30,18 +56,30 @@ public class Term {
     }
 
     public int getOffset() {
-        return this.offset;
+        return offset;
     }
 
     public void setOffset(int offset) {
         this.offset = offset;
     }
 
+    /**
+     * toString
+     */
     public String toString() {
-        return Config.BaseConf.speechTagging ? this.word + "/" + this.nature : this.word;
+        if (Config.BaseConf.speechTagging) {
+            return word + "/" + nature;
+        }
+        return word;
     }
 
+    /**
+     * 长度
+     *
+     * @return
+     */
     public int length() {
-        return this.word.length();
+        return word.length();
     }
 }
+

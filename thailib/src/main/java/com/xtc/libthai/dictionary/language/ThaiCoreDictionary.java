@@ -4,14 +4,15 @@ package com.xtc.libthai.dictionary.language;
 import com.xtc.libthai.Config;
 import com.xtc.libthai.dictionary.CoreDictionary;
 
+/**
+ * 泰语核心词典
+ *
+ */
 public class ThaiCoreDictionary {
 
     private static final String TAG = "ThaiCoreDictionary: ";
 
     public static CoreDictionary thaiDictionary;
-
-    public ThaiCoreDictionary() {
-    }
 
     static {
         long start = System.currentTimeMillis();

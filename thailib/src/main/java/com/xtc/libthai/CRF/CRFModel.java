@@ -32,7 +32,7 @@ public class CRFModel implements ICacheAble {
     }
 
     public static CRFModel loadBinModel(String path) {
-        ByteArray byteArray = ByteArray.createByteArray(path + ".bin");
+        ByteArray byteArray = ByteArray.createByteArray(path + Config.FileExtensions.BIN);
         if (byteArray == null) {
             return null;
         } else {
@@ -42,7 +42,7 @@ public class CRFModel implements ICacheAble {
     }
 
     public static CRFModel loadGzModel(String path) {
-        ByteArray byteArray = ByteArray.createByteArrayByGz(path + ".gz");
+        ByteArray byteArray = ByteArray.createByteArrayByGz(path + Config.FileExtensions.GZ);
         if (byteArray == null) {
             return null;
         } else {
@@ -53,10 +53,10 @@ public class CRFModel implements ICacheAble {
 
     public static CRFModel loadTxtModel(String path, CRFModel model) {
         CRFModel CRFModel = model;
-        if (model.load(ByteArray.createByteArrayByGz(path + ".gz"))) {
+        if (model.load(ByteArray.createByteArrayByGz(path + Config.FileExtensions.GZ))) {
             return model;
         } else {
-            InputStream is = IOUtil.getInputStream(path + ".txt");
+            InputStream is = IOUtil.getInputStream(path + Config.FileExtensions.TXT);
             IOUtil.LineIterator lineIterator = new IOUtil.LineIterator(is);
             if (!lineIterator.hasNext()) {
                 return null;
@@ -132,7 +132,7 @@ public class CRFModel implements ICacheAble {
                 Config.Log.logger.info("开始构建双数组trie树");
                 CRFModel.featureFunctionTrie = new DATrie();
                 CRFModel.featureFunctionTrie.build(featureFunctionMap);
-                String gzName = System.getProperty("user.dir") + "/src/main/resources" + path + ".gz";
+                String gzName = System.getProperty("user.dir") + "/src/main/resources" + path + Config.FileExtensions.GZ;
 
                 try {
                     Config.Log.logger.info("开始缓存" + gzName);
@@ -140,7 +140,7 @@ public class CRFModel implements ICacheAble {
                     CRFModel.save(out);
                     out.close();
                 } catch (Exception var14) {
-                    Config.Log.logger.warning("在缓存" + path + ".bin" + "时发生错误" + StringUtil.exceptionToString(var14));
+                    Config.Log.logger.warning("在缓存" + path + Config.FileExtensions.BIN + "时发生错误" + StringUtil.exceptionToString(var14));
                 }
 
                 return CRFModel;

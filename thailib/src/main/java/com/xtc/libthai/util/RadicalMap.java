@@ -115,7 +115,7 @@ public class RadicalMap {
             type = "e";
         } else if (str.matches("[ก-๛]+")) {
             type = "t";
-        } else if (str.matches("[\\pP‘’“”]+")) {
+        } else if (str.matches("[\\p{P}‘’“”]+")) {
             type = "p";
         } else {
             type = "v";
@@ -147,7 +147,7 @@ public class RadicalMap {
      type = "d";
      } else if (syllable.matches("[A-Za-z]+")) {
      type = "e";
-     } else if (syllable.matches("[\\pP‘’“”]+")) {
+     } else if (syllable.matches("[\p{P}‘’“”]+")) {
      type = "p";
      }else {
      type = "o";
@@ -180,7 +180,7 @@ public class RadicalMap {
      type = "d";
      } else if (str.matches("[a-zA-Z]+")) {
      type = "e";
-     } else if (str.matches("[\\pP‘’“”]+")) {
+     } else if (str.matches("[\p{P}‘’“”]+")) {
      type = "p";
      } else {
      type = "o";
@@ -203,7 +203,7 @@ public class RadicalMap {
             type = "e";
         } else if (word.matches("[ก-๛]+")) {
             type = "t";
-        } else if (word.matches("[\\pP‘’“”]+")) {
+        } else if (word.matches("[\\p{P}‘’“”]+")) {
             type = "p";
         } else {
             type = "v";
@@ -222,7 +222,7 @@ public class RadicalMap {
             temp = "e";
         } else if (viWord.matches("^[À-ỹ]+$")) {
             temp = "t";
-        } else if (viWord.matches("[\\pP]+")) {
+        } else if (viWord.matches("[\\p{P}]+")) {
             temp = "p";
         } else {
             temp = "v";

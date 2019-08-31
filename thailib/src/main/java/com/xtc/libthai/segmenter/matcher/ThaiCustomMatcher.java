@@ -36,7 +36,7 @@ public class ThaiCustomMatcher extends AbstractCustomMatcher {
                     && !RecogTool.recog(StringUtil.merge(strs, start, len))) {
                 //如果长度为一且在词典中未找到匹配
                 //则按长度为一切分
-                if (len == 1) {
+                if (len == wordMinLength) {
                     break;
                 }
                 //如果查不到，则长度减一后继续

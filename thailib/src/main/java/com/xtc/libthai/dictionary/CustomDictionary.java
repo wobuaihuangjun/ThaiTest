@@ -4,13 +4,8 @@ import com.xtc.libthai.Config;
 import com.xtc.libthai.collection.trie.CustomTrie;
 import com.xtc.libthai.util.ByteArray;
 import com.xtc.libthai.util.IOUtil;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -46,45 +41,28 @@ public class CustomDictionary implements Dictionary<CustomDictionary> {
         }
         System.out.println(TAG + "自定义词典读入词条" + keyWord.size() + "，耗时" + (System.currentTimeMillis() - start) + "ms");
         coreDictionary.customTrie.build(keyWord);
+
+//        getNewWord(path, keyWord);
+
         return coreDictionary;
     }
 
-    private static List<String> loadCustomTxtDictionary(String path) {
-        List<String> wordList = new ArrayList<>();
-        BufferedReader br = null;
-        InputStream inputStream = null;
-        try {
-            inputStream = IOUtil.getInputStream(path);
-            if (inputStream == null) {
-                return wordList;
-            }
-            br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+    private static void getNewWord(String path, List<String> keyWord) {
+        String realPath = path + "/dictionary" + Config.FileExtensions.TXT;
+        List<String> words = loadCustomTxtDictionary(realPath);
 
-            String line;
-            while ((line = br.readLine()) != null) {
-//                System.out.println(TAG + "loadCustomTxtDictionary, line:" + line);
-                wordList.add(line);
-            }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        List<String> newWord = new LinkedList<>();
+        for (String word : words) {
+            if (!keyWord.contains(word)) {
+                newWord.add(word);
             }
         }
-        return wordList;
+
+        IOUtil.saveCollectionToTxt(newWord, "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/libthai/dictionary/Thai/tdict-new-word.txt");
+    }
+
+    private static List<String> loadCustomTxtDictionary(String path) {
+        return IOUtil.readLines(IOUtil.getInputStream(path));
     }
 
     @Override

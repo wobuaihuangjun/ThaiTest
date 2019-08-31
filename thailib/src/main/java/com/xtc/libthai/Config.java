@@ -122,22 +122,25 @@ public class Config {
          * 自定义词典
          */
         public static String[] customDictionaryFile = {
-                "/tdict-city",
-                "/tdict-collection",
-                "/tdict-common",
-                "/tdict-country",
-                "/tdict-custom",
-                "/tdict-district",
-                "/tdict-geo",
-                "/tdict-history",
-                "/tdict-ict",
-                "/tdict-lang-ethnic",
-                "/tdict-proper",
-                "/tdict-science",
-                "/tdict-slang",
-                "/tdict-spell",
-                "/tdict-std",
-                "/tdict-std-compound",
+//                "/tdict-city",
+//                "/tdict-collection",
+//                "/tdict-common",
+//                "/tdict-country",
+//                "/tdict-custom",
+//                "/tdict-district",
+//                "/tdict-geo",
+//                "/tdict-history",
+//                "/tdict-ict",
+//                "/tdict-lang-ethnic",
+//                "/tdict-proper",
+//                "/tdict-science",
+//                "/tdict-slang",
+//                "/tdict-spell",
+//                "/tdict-std",
+//                "/tdict-std-compound",
+//                "/tdict-new-word",
+                "/thai-use",
+
         };
     }
 

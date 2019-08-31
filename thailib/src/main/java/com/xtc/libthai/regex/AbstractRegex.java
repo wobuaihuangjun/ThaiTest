@@ -17,7 +17,7 @@ public abstract class AbstractRegex {
     /**
      * 标点符号
      */
-    protected final static String PUNCTUATION = "[\\pP‘’“”]+";//("\r" + orex  + "\n") +  ;
+    protected final static String PUNCTUATION = "[\\p{P}‘’“”]+";//("\r" + orex  + "\n") +  ;
     /**
      * 换行符
      */

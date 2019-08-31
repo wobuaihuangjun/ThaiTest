@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="contact_relations">
+        <item>คุณพ่อ</item>
+        <item>คุณแม่</item>
+        <item>น้องสาว</item>
+        <item>คุณปู่</item>
+        <item>คุณย่า</item>
+        <item>พี่ชาย</item>
+        <item>คุณตา</item>
+        <item>คุณยาย</item>
+        <item>คุณครู</item>
+        <item>กำหนดชื่อเอง</item>
+    </string-array>
+
+    <string-array name="contact_service_relations">
+        <item>คุณพ่อ</item>
+        <item>คุณแม่</item>
+        <item>น้องสาว</item>
+        <item>พี่ชาย</item>
+        <item>คุณปู่</item>
+        <item>คุณย่า</item>
+        <item>คุณตา</item>
+        <item>คุณยาย</item>
+        <item>คุณครู</item>
+        <item> School number </item>
+    </string-array>
+
+    <!-- 宝贝中心-more_fun_watch_setting
+      此处排序不可乱动，有业务逻辑！！！
+      (其他必须位于第11位)
+      -->
+    <string-array name="baby_info_grade_china">
+        <item>ยังไม่เข้าเรียน</item>
+        <item>อนุบาล 1</item>
+        <item>อนุบาล 2</item>
+        <item>อนุบาล 3</item>
+        <item>ชั้นเตรียมประถม</item>
+        <item>ป.1</item>
+        <item>ป.2</item>
+        <item>ป.3</item>
+        <item>ป.4</item>
+        <item>ป.5</item>
+        <item>ป.6</item>
+        <item>อื่นๆ</item>
+        <item>ม.1</item>
+        <item>ม.2</item>
+        <item>ม.3</item>
+        <item>ม.4</item>
+        <item>ม.5</item>
+        <item>ม.6</item>
+    </string-array>
+
+    <string-array name="baby_info_grade_hong_kong">
+        <item>ยังไม่เข้าเรียน</item>
+        <item>ชั้นเตรียมประถม</item>
+        <item>Playgroup</item>
+        <item>ชั้นเตรียมประถม</item>
+        <item>อนุบาล</item>
+        <item>ป.1</item>
+        <item>ป.2</item>
+        <item>ป.3</item>
+        <item>ป.4</item>
+        <item>ป.5</item>
+        <item>ป.6</item>
+        <item>อื่นๆ</item>
+        <item>ม.1</item>
+        <item>ม.2</item>
+        <item>ม.3</item>
+        <item>ม.4</item>
+        <item>ม.5</item>
+        <item>ม.6</item>
+    </string-array>
+
+
+    <string-array name="baby_info_grade_indonesia">
+        <item>ยังไม่เข้าเรียน</item>
+        <item>Playgroup</item>
+        <item>อนุบาล 1</item>
+        <item>อนุบาล 3</item>
+        <item>ป.1</item>
+        <item>ป.2</item>
+        <item>ป.3</item>
+        <item>ป.4</item>
+        <item>ป.5</item>
+        <item>ป.6</item>
+        <item>ม.1</item>
+        <item>อื่นๆ</item>
+        <item>ม.2</item>
+        <item>ม.3</item>
+        <item>ม.4</item>
+        <item>ม.5</item>
+        <item>ม.6</item>
+    </string-array>
+
+    <string-array name="baby_info_class">
+        <item>อื่นๆ</item>
+        <item>（1）ชั้นเรียน</item>
+        <item>（2）ชั้นเรียน</item>
+        <item>（3）ชั้นเรียน</item>
+        <item>（4）ชั้นเรียน</item>
+        <item>（5）ชั้นเรียน</item>
+        <item>（6）ชั้นเรียน</item>
+        <item>（7）ชั้นเรียน</item>
+        <item>（8）ชั้นเรียน</item>
+        <item>（9）ชั้นเรียน</item>
+        <item>（10）ชั้นเรียน</item>
+        <item>（11）ชั้นเรียน</item>
+        <item>（12）ชั้นเรียน</item>
+        <item>（13）ชั้นเรียน</item>
+        <item>（14）ชั้นเรียน</item>
+        <item>（15）ชั้นเรียน</item>
+        <item>（16）ชั้นเรียน</item>
+        <item>（17）ชั้นเรียน</item>
+        <item>（18）ชั้นเรียน</item>
+        <item>（19）ชั้นเรียน</item>
+        <item>（20）ชั้นเรียน</item>
+    </string-array>
+
+    <string-array name="baby_info_light_time">
+        <item>5วินาที</item>
+        <item>10วินาที</item>
+        <item>15วินาที</item>
+        <item>20วินาที</item>
+        <item>30วินาที</item>
+        <item>60วินาที</item>
+    </string-array>
+
+
+    <!-- 时区设置 -->
+    <string-array name="watch_timezone">
+        <item>จาการ์ตา</item>
+        <item>จายาปูรา</item>
+        <item>มากัสซาร์</item>
+    </string-array>
+
+    <string-array name="contact_school_page_relations">
+        <item>คุณพ่อ</item>
+        <item>คุณแม่</item>
+        <item>น้องสาว</item>
+        <item>คุณปู่</item>
+        <item>คุณย่า</item>
+        <item>พี่ชาย</item>
+        <item>คุณตา</item>
+        <item>คุณยาย</item>
+        <item>คุณครู</item>
+        <item>กำหนดความสัมพันธ์</item>
+        <item> School number </item>
+    </string-array>
+
+    <string-array name="lgSetting">
+        <item>เพิ่มสถานที่ที่ใช้บ่อย สร้างพื้นที่ชีวิตประจำวันให้สมบูรณ์</item>
+        <item>ช่วงเวลาปกป้อง</item>
+    </string-array>
+
+
+    <string-array name="homepage_main_school_guard_state">
+        <item>เริ่มโหมดSchoolเซฟโซน…</item>
+        <item>เริ่มโหมดSchoolเซฟโซน…</item>
+        <item>ลูกถึงโรงเรียนแล้ว</item>
+        <item>ลูกถึงโรงเรียนสาย</item>
+        <item>ลูกยังไม่ถึงโรงเรียน</item>
+        <item>ลูกออกจากโรงเรียนแล้ว</item>
+        <item>ลูกหยุดระหว่างทาง</item>
+        <item>ลูกถึงบ้านแล้ว</item>
+        <item>ลูกยังไม่ถึงบ้าน</item>
+        <item>ตรวจสอบไม่พบการถึงโรงเรียน</item>
+        <item>ตรวจสอบไม่พบการออกจากโรงเรียน</item>
+        <item>ตรวจสอบไม่พบการถึงบ้าน</item>
+    </string-array>
+
+
+    <string-array name="add_list_title">
+        <item>เพิ่มรายชื่อผู้ติดต่อ</item>
+        <item>เพิ่มนาฬิกา</item>
+        <item>ยกเลิกการเชื่อมต่อนาฬิกา</item>
+        <item>เปลี่ยนแอดมิน</item>
+        <item>คิวอาร์โค้ดนาฬิกา</item>
+        <item>ช่วยเหลือและข้อเสนอแน</item>
+        <item>ฝ่ายบริการลูกค้าของฉัน</item>
+    </string-array>
+
+    <string-array name="integral_level_tv">
+        <item>เลเวล：LV1</item>
+        <item>เลเวล：LV2</item>
+        <item>เลเวล：LV3</item>
+        <item>เลเวล：LV4</item>
+        <item>เลเวล：LV5</item>
+        <item>เลเวล：LV6</item>
+        <item>เลเวล：LV7</item>
+        <item>เลเวล：LV8</item>
+        <item>เลเวล：LV9</item>
+        <item>เลเวล：LV10</item>
+        <item>เลเวล：LV11</item>
+        <item>เลเวล：LV12</item>
+        <item>เลเวล：LV13</item>
+        <item>เลเวล：LV14</item>
+        <item>เลเวล：LV15</item>
+        <item>เลเวล：LV6</item>
+        <item>เลเวล：LV17</item>
+        <item>เลเวล：LV18</item>
+        <item>เลเวล：LV19</item>
+        <item>เลเวล：LV20</item>
+    </string-array>
+
+    <string-array name="umeng_icon_name">
+        <item>วีแชท</item>
+        <item>ไทม์ไลน์</item>
+        <item>ไทม์ไลน์QQ</item>
+        <item>Weibo</item>
+        <item>QQ</item>
+    </string-array>
+
+
+    <!--时间格式工具类 模块开始-->
+    <plurals name="time_utils_compare_month">
+        <item quantity="zero">%d เดือนที่แล้ว</item>
+        <item quantity="one">%d เดือนที่แล้ว</item>
+        <item quantity="other">%d เดือนที่แล้ว</item>
+    </plurals>
+    <plurals name="time_utils_compare_week">
+        <item quantity="zero">%d สัปดาห์ที่แล้ว</item>
+        <item quantity="one">%d สัปดาห์ที่แล้ว</item>
+        <item quantity="other">%d สัปดาห์ที่แล้ว</item>
+    </plurals>
+    <plurals name="time_utils_compare_day">
+        <item quantity="zero">%d วันที่แล้ว</item>
+        <item quantity="one">%d วันที่แล้ว</item>
+        <item quantity="other">%d วันที่แล้ว</item>
+    </plurals>
+    <plurals name="time_utils_compare_hour">
+        <item quantity="zero">%d ชั่วโมงที่แล้ว</item>
+        <item quantity="one">%d ชั่วโมงที่แล้ว</item>
+        <item quantity="other">%d ชั่วโมงที่แล้ว</item>
+    </plurals>
+    <plurals name="time_utils_compare_minute">
+        <item quantity="zero">%d นาทีที่แล้ว</item>
+        <item quantity="one">%d นาทีที่แล้ว</item>
+        <item quantity="other">%d นาทีที่แล้ว</item>
+    </plurals>
+    <plurals name="time_utils_compare_second">
+        <item quantity="zero">%d วินาทีที่แล้ว</item>
+        <item quantity="one">%d วินาทีที่แล้ว</item>
+        <item quantity="other">%d วินาทีที่แล้ว</item>
+    </plurals>
+    <plurals name="cumulative_length_second_concat_str">
+        <item quantity="zero">% dวินาที</item>
+        <item quantity="one">%d วินาที</item>
+        <item quantity="other">%d วินาที</item>
+    </plurals>
+    <!--时间格式工具类 模块结束-->
+
+
+    <plurals name="daily_exercise_step">
+        <item quantity="zero">%d ก้าว</item>
+        <item quantity="one">%d ก้าว</item>
+        <item quantity="other">%d ก้าว</item>
+    </plurals>
+</resources>

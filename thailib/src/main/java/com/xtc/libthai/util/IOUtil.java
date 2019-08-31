@@ -24,6 +24,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -452,7 +453,7 @@ public class IOUtil {
      *
      * @param fileName 文件名
      * @param line     追加的内容
-     *                 * @param encoding 编码
+     * @param encoding 编码
      */
     public static void appendLine(String fileName, String line, String encoding) {
         try {
@@ -1095,7 +1096,7 @@ public class IOUtil {
      * @return List<String>
      */
     public static List<String> readLines(File file) {
-        List<String> fileContent = new LinkedList<String>();
+        List<String> fileContent = new LinkedList<>();
         try {
             if (file.isFile() && file.exists()) {
                 InputStreamReader read = new InputStreamReader(new FileInputStream(file), "utf-8");
@@ -1125,14 +1126,15 @@ public class IOUtil {
 
     /**
      * 以行为单位读取文件
-     *
-     * @param is
-     * @return
      */
     public static List<String> readLines(InputStream is) {
-        List<String> fileContent = new LinkedList<String>();
+        List<String> fileContent = new ArrayList<>();
+        if (is == null) {
+            return fileContent;
+        }
+        InputStreamReader read = null;
         try {
-            InputStreamReader read = new InputStreamReader(is, "utf-8");
+            read = new InputStreamReader(is, "utf-8");
             BufferedReader reader = new BufferedReader(read);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -1142,6 +1144,19 @@ public class IOUtil {
             is.close();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (read != null)
+                    read.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (is != null)
+                    is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return fileContent;
     }
@@ -1153,7 +1168,7 @@ public class IOUtil {
      * @return List<String>
      */
     public static List<String> readLines(File file, String encoding) {
-        List<String> lines = new LinkedList<String>();
+        List<String> lines = new LinkedList<>();
         try {
             if (file.isFile() && file.exists()) {
                 InputStreamReader read = new InputStreamReader(new FileInputStream(file), encoding);
@@ -1188,7 +1203,7 @@ public class IOUtil {
      * @return List<String>
      */
     public static List<String> readThaiLines(File file) {
-        List<String> lines = new LinkedList<String>();
+        List<String> lines = new LinkedList<>();
         try {
             if (file.isFile() && file.exists()) {
                 InputStreamReader read = new InputStreamReader(new FileInputStream(file), "ISO-8859-11");

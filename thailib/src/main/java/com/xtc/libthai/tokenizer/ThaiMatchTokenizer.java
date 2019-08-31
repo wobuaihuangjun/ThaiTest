@@ -2,7 +2,6 @@ package com.xtc.libthai.tokenizer;
 
 import com.xtc.libthai.segmenter.Segmenter;
 import com.xtc.libthai.segmenter.domain.Term;
-import com.xtc.libthai.segmenter.matcher.language.ThaiCustomMatchSegmenter;
 import com.xtc.libthai.segmenter.matcher.language.ThaiMaxMatchSegmenter;
 import com.xtc.libthai.segmenter.matcher.language.ThaiMinMatchSegmenter;
 import com.xtc.libthai.segmenter.matcher.language.ThaiRevMaxMatchSegmenter;
@@ -22,11 +21,6 @@ public class ThaiMatchTokenizer {
     public final static Segmenter minMatchThaiSegment = new ThaiMinMatchSegmenter();
     public final static Segmenter rMaxMatchThaiSegment = new ThaiRevMaxMatchSegmenter();
     public final static Segmenter rMinMatchThaiSegment = new ThaiRevMinMatchSegmenter();
-    public final static Segmenter customMatchSegmenter = new ThaiCustomMatchSegmenter();
-
-    public static List<Term> customMaxSegment(String text){
-        return customMatchSegmenter.segment(text);
-    }
 
     /**
      * 正向最大分词

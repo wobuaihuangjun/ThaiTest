@@ -27,13 +27,13 @@ public class ThaiCustomMatchSegmenter extends AbstractThaiSegmenter {
         long start = System.currentTimeMillis();
         for(int i = 0; i < len; ++i) {
             String string = sentences[i];
-            System.out.println("11: " + string + "，time cost1: " + (System.currentTimeMillis() - start));
+//            System.out.println("11: " + string + "，time cost1: " + (System.currentTimeMillis() - start));
 
             String[] d = toTCC(string);
-            System.out.println("12: " +  Arrays.toString(d)+ "，time cost1: " + (System.currentTimeMillis() - start));
+//            System.out.println("12: " +  Arrays.toString(d)+ "，time cost1: " + (System.currentTimeMillis() - start));
 
             List<Term> a = segment(d);
-            System.out.println("13: " + a+ "，time cost1: " + (System.currentTimeMillis() - start));
+//            System.out.println("13: " + a+ "，time cost1: " + (System.currentTimeMillis() - start));
 
             terms.addAll(a);
         }
@@ -57,7 +57,7 @@ public class ThaiCustomMatchSegmenter extends AbstractThaiSegmenter {
     }
 
     public static void main(String[] args) {
-//        Config.BaseConf.enableDebug();
+        Config.BaseConf.enableDebug();
 
         String text = "คุณจะเสียสิทธิ์การเป็นแอดมินนาฬิกาไปหลังเปลี่ยนแอดมิน ต้องการเปลี่ยนแอดมินหรือไม่";
         ThaiCustomMatchSegmenter seg = new ThaiCustomMatchSegmenter();

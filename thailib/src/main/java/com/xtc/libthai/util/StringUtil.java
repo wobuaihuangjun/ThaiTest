@@ -61,7 +61,7 @@ public class StringUtil {
             else
                 sb.append(values[i]);
         }
-        return sb.toString().trim();
+        return sb.toString();
     }
 
     /**

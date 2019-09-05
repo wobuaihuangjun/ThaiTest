@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="dimen_width_test">100dp</dimen>
+    <dimen name="dimen_height_test">200dp</dimen>
+
+</resources>

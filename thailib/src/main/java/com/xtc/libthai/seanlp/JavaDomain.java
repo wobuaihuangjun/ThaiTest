@@ -83,6 +83,9 @@ public class JavaDomain {
 //        testString();
 
 //        removeRepeatString();
+
+        System.out.println(IOUtil.getCurrentFilePath());//user.dir指定了当前的路径
+        FileOperation.loadConfigFile();
     }
 
     private static void maxSegmentTest(String thText) {
@@ -110,6 +113,9 @@ public class JavaDomain {
         System.out.println();
     }
 
+    /**
+     * 将txt格式的字符，按行进行分词
+     */
     private static void testString() {
         String path = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-string.txt";
         long start = System.currentTimeMillis();

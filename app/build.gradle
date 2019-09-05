@@ -8,7 +8,7 @@ android {
     defaultConfig {
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        applicationId "com.hzj.mytest"
+        applicationId "com.hzj.ThaiTest"
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

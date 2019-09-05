@@ -5,4 +5,7 @@
 
     <dimen name="dimen_label_gap_20">20dp</dimen>
     <dimen name="dimen_text_size_18">18sp</dimen>
+
+    <dimen name="dimen_width_test">10dp</dimen>
+    <dimen name="dimen_height_test">10dp</dimen>
 </resources>

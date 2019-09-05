@@ -45,6 +45,13 @@ public class IOUtil {
     public static final boolean system_type = System.getProperty("os.name").toLowerCase().startsWith("win");
     public static final String line_separator = System.getProperty("line.separator");
 
+    /**
+     * 获取程序的当前路径
+     */
+    public static String getCurrentFilePath(){
+        return System.getProperty("user.dir");
+    }
+
     public static InputStream getInputStream(String path) {
         return IOUtil.class.getResourceAsStream(path);
     }

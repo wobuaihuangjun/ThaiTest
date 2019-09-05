@@ -4,13 +4,86 @@
     android:layout_height="match_parent"
     android:background="#eeffff">
 
-    <TextView
-        android:id="@+id/text_thai"
-        android:background="#ffffff"
-        android:layout_margin="20dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="@dimen/dimen_width_test"
+            android:layout_height="@dimen/dimen_height_test"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="@string/test_thai_adjust" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="@string/test_thai" />
+
+        <TextView
+            android:id="@+id/textview_thai_set_text1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_white"
+            android:paddingLeft="100dp" />
+
+        <TextView
+            android:id="@+id/textview_thai_set_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_white"
+            android:paddingLeft="100dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="100dp">
+
+            <TextView
+                android:id="@+id/textview_thai_set_text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="100dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_white"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_thai_set_text1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button_thai_set_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/text_thai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="#ffffff" />
+    </LinearLayout>
 
 
 </ScrollView>

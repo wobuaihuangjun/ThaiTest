@@ -7,4 +7,9 @@
     <string name="title_activity_demo">Demo</string>
     <string name="paste">paste long text here</string>
     <string name="start">start</string>
+
+    <string name="test_thai_adjust" >คุณจะเสียสิทธิ์การเป็นแอดมินนาฬิกาไปหลังเปลี่ยนแอดมิน ต้องการเปลี่ยนแอดมินหรือไม่</string>
+
+    <string name="test_thai" >test thai</string>
+
 </resources>

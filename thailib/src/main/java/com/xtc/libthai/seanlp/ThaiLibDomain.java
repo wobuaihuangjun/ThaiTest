@@ -2,18 +2,10 @@ package com.xtc.libthai.seanlp;
 
 import com.xtc.libthai.seanlp.util.IOUtil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * Created by huangzj on 2016/3/17.
+ * Created by huangzj on 2019/8/17.
  */
-public class JavaDomain {
+public class ThaiLibDomain {
 
     static String[] text = {
             "หากคุณต้องการเปิดหรือปิดการแจ้งเตือนข้อความใหม่จาก",
@@ -68,7 +60,7 @@ public class JavaDomain {
 
 //        System.out.println("กรุณารอ");
 //        System.out.println("      maxSegment: " + SeanlpThai.maxSegment("กรุณารอ"));
-//        System.out.println("customMaxSegment: " + SeanlpThai.customMaxSegment("กรุณารอ"));
+        System.out.println("customMaxSegment: " + SeanlpThai.customMaxSegment("ดำเนินการตรวจสอบอินเทอร์เน็ตจะช่วยให้เราแก้ไขปัญหาของคุณได้เร็วขึ้น"));
 
 //        System.out.println("คุณสามารถดำเนินการHandleในการจัดลับดับรายชื่อ");
 //        String result = SeanlpThai.breakStringByCustomMaxSegment("คุณสามารถดำเนินการHandleในการจัดลับดับรายชื่อ", 20);
@@ -78,14 +70,7 @@ public class JavaDomain {
 //            maxSegmentTest(s);
 //        }
 
-//        xmlToTxt();
-
-//        testString();
-
-//        removeRepeatString();
-
-        System.out.println(IOUtil.getCurrentFilePath());//user.dir指定了当前的路径
-        FileOperation.loadConfigFile();
+//        System.out.println(IOUtil.getCurrentFilePath());//user.dir指定了当前的路径
     }
 
     private static void maxSegmentTest(String thText) {
@@ -111,117 +96,6 @@ public class JavaDomain {
         System.out.println("2: " + SeanlpThai.customMaxSegment(thText));// 词汇最大化拆分
 
         System.out.println();
-    }
-
-    /**
-     * 将txt格式的字符，按行进行分词
-     */
-    private static void testString() {
-        String path = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-string.txt";
-        long start = System.currentTimeMillis();
-
-        List<String> stringList = IOUtil.readLines(path);
-
-        List<String> newList = new LinkedList<>();
-        for (String str : stringList) {
-            String result = SeanlpThai.customMaxSegment(str);
-            newList.add(result);
-        }
-
-        System.out.println("testString time cost2: " + (System.currentTimeMillis() - start));
-
-        String segmentPath = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-segment-string.txt";
-        IOUtil.overwriteLines(segmentPath, newList);
-    }
-
-    /**
-     * 移除文件中重复的数据行
-     */
-    private static void removeRepeatString() {
-        String path = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-string.txt";
-
-        List<String> stringList = IOUtil.readLines(path);
-
-        List<String> newList = new LinkedList<>();
-
-        for (String str : stringList) {
-            if (!newList.contains(str)) {
-                newList.add(str);
-            }
-        }
-
-        IOUtil.overwriteLines(path, newList);
-    }
-
-    /**
-     * 将xml文件的String提取出来，保存成txt
-     */
-    private static void xmlToTxt() {
-        IOUtil.saveCollectionToTxt(loadXmlData(), "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-string.txt");
-    }
-
-    private static List<String> loadXmlData() {
-        String path = "/com/xtc/strings.txt";
-        List<String> wordList = new LinkedList<>();
-
-        BufferedReader br = null;
-        InputStream inputStream = null;
-        try {
-            inputStream = IOUtil.getInputStream(path);
-            if (inputStream == null) {
-                return wordList;
-            }
-            br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-            String text = "";
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains("<string")) {//行开始
-                    text = line;
-                } else {
-                    text = text + line;
-                }
-
-                if (line.contains("</string>")) {//行结束
-//                    System.out.println(text);
-//                    System.out.println();
-
-                    if (text.trim().length() > 0) {
-                        text = text.replace("</string>", "");
-                        String[] split = text.split(">");
-
-
-                        if (split.length == 2) {
-                            wordList.add(split[1]);
-                        } else {
-//                            System.out.println("split length:" + split.length);
-//                            System.out.println(split[0]);
-//                            System.out.println(split[1]);
-                        }
-                    }
-                }
-            }
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return wordList;
     }
 
 }

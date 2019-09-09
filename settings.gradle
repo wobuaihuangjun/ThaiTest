@@ -1,1 +1,1 @@
-include ':app', ':thailib'
+include ':app', ':thailib', ':toolthai'

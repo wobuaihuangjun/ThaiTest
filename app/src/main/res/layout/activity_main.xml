@@ -12,19 +12,32 @@
         <ImageView
             android:layout_width="@dimen/dimen_width_test"
             android:layout_height="@dimen/dimen_height_test"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="#ffffff"
-            android:text="@string/test_thai_adjust" />
+            android:text="@string/test_thai_adjust"
+            android:visibility="gone" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            android:text="@string/test_thai" />
+            android:text="@string/test_thai"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/textview_thai_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="หลังเปิดโหมดแจ้งเตือนเมื่อหาย เพียงแค่นาฬิกาเชื่อมต่ออินเทอร์เน็ต จะส่งตำแหน่งไปยังแอพฯโดยอัตโนมัติทุกครั้งที่เปิดเครื่อง" />
 
         <TextView
             android:id="@+id/textview_thai_set_text1"

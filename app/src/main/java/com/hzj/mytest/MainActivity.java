@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 
         textView = findViewById(R.id.text_thai);
 
+        TextView textViewThaiText = findViewById(R.id.textview_thai_text1);
 
         TextView textViewSetThai = findViewById(R.id.textview_thai_set_text1);
         Button buttonSetThai1 = findViewById(R.id.button_thai_set_text1);
@@ -61,6 +62,10 @@ public class MainActivity extends Activity {
 
         TextView textViewSetThai2 = findViewById(R.id.textview_thai_set_text2);
         TextView textViewSetThai3 = findViewById(R.id.textview_thai_set_text3);
+
+
+        //各种断行，此文本表达的意义都没有改变
+//        SeanlpThai.setBreakText(textViewThaiText, "หลังเปิดโหมดแจ้งเตือนเมื่อหาย เพียงแค่นาฬิกาเชื่อมต่ออินเทอร์เน็ต จะส่งตำแหน่งไปยังแอพฯโดยอัตโนมัติทุกครั้งที่เปิดเครื่อง");
 
         textView.setText(SeanlpThai.customMaxSegment(text[0]));
 

@@ -61,6 +61,9 @@ public class CustomDictionary implements Dictionary<CustomDictionary> {
         IOUtil.saveCollectionToTxt(newWord, "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/libthai/dictionary/Thai/tdict-new-word.txt");
     }
 
+    /**
+     * 从resources读取文件
+     */
     private static List<String> loadCustomTxtDictionary(String path) {
         return IOUtil.readLines(IOUtil.getInputStream(path));
     }

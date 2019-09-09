@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ThaiTest.iml" filepath="$PROJECT_DIR$/ThaiTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/thailib/thailib.iml" filepath="$PROJECT_DIR$/thailib/thailib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/toolthai/toolthai.iml" filepath="$PROJECT_DIR$/toolthai/toolthai.iml" />
     </modules>
   </component>
 </project>

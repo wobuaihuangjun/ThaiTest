@@ -31,6 +31,13 @@ public class CustomTrie implements ITrie {
         return size;
     }
 
+    /**
+     * 获取词库的词汇列表
+     */
+    public List<String> getWord() {
+        return base;
+    }
+
     @Override
     public boolean contains(char[] text, int offset, int count) {
         return false;

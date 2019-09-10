@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <string name="app_name">ThaiLib</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">ToolThai</string>
 
     <string name="channel_name_download">แจ้งเตือนการดาวน์โหลดApp</string>
 
@@ -181,44 +183,9 @@
     <string name="the_day_before_yesterday">เมื่อวานก่อน</string>
 
 
-    <!--时间格式工具类 模块开始-->
-    <plurals name="time_utils_compare_month">
-        <item quantity="zero">%d เดือนที่แล้ว</item>
-        <item quantity="one">%d เดือนที่แล้ว</item>
-        <item quantity="other">%d เดือนที่แล้ว</item>
-    </plurals>
-    <plurals name="time_utils_compare_week">
-        <item quantity="zero">%d สัปดาห์ที่แล้ว</item>
-        <item quantity="one">%d สัปดาห์ที่แล้ว</item>
-        <item quantity="other">%d สัปดาห์ที่แล้ว</item>
-    </plurals>
-    <plurals name="time_utils_compare_day">
-        <item quantity="zero">%d วันที่แล้ว</item>
-        <item quantity="one">%d วันที่แล้ว</item>
-        <item quantity="other">%d วันที่แล้ว</item>
-    </plurals>
-    <plurals name="time_utils_compare_hour">
-        <item quantity="zero">%d ชั่วโมงที่แล้ว</item>
-        <item quantity="one">%d ชั่วโมงที่แล้ว</item>
-        <item quantity="other">%d ชั่วโมงที่แล้ว</item>
-    </plurals>
-    <plurals name="time_utils_compare_minute">
-        <item quantity="zero">%d นาทีที่แล้ว</item>
-        <item quantity="one">%d นาทีที่แล้ว</item>
-        <item quantity="other">%d นาทีที่แล้ว</item>
-    </plurals>
-    <plurals name="time_utils_compare_second">
-        <item quantity="zero">%d วินาทีที่แล้ว</item>
-        <item quantity="one">%d วินาทีที่แล้ว</item>
-        <item quantity="other">%d วินาทีที่แล้ว</item>
-    </plurals>
+
     <string name="cumulative_length_second">วินาที</string>
-    <plurals name="cumulative_length_second_concat_str">
-        <item quantity="zero">% dวินาที</item>
-        <item quantity="one">%d วินาที</item>
-        <item quantity="other">%d วินาที</item>
-    </plurals>
-    <!--时间格式工具类 模块结束-->
+
 
     <!-- 网络错误统一提示开始 -->
     <string name="net_error">ไม่ได้เชื่อมต่ออินเทอร์เน็ต กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง</string>
@@ -467,11 +434,6 @@
     <string name="please_input_rand_code">กรุณากรอกรหัสยืนยัน</string>
     <string name="verify_code">รหัสยืนยัน</string>
 
-    <plurals name="daily_exercise_step">
-        <item quantity="zero">%d ก้าว</item>
-        <item quantity="one">%d ก้าว</item>
-        <item quantity="other">%d ก้าว</item>
-    </plurals>
     <string name="time_hour">ชั่วโมง</string>
     <string name="time_minute">นาที</string>
     <string name="internet_failed_phone">อินเทอร์เน็ตนาฬิกาผิดปกติ</string>
@@ -553,8 +515,8 @@
     <string name="support_indonesia_operator">รองรับซิมการ์ดของelkomsel Indosat และ3</string>
     <!--防水性能文案-->
     <string name="saferecord_water_property_explain1">·สามารถป้องกันละอองน้ำ เช่น การล้างมือ ละอองฝน เป็นต้น แต่ไม่สามารถแช่น้ำได้
-    \n·ไม่ป้องกันไอน้ำ กรุณาหลีกเลี่ยงน้ำอุณหภูมิ 40 องศาขึ้นไป
-    \n·หากนาฬิกาโดนน้ำ กรุณาสะบัดน้ำตรงลำโพงของตัวเครื่องออกก่อนจึงค่อยใช้งานตามปกติ</string>
+        \n·ไม่ป้องกันไอน้ำ กรุณาหลีกเลี่ยงน้ำอุณหภูมิ 40 องศาขึ้นไป
+        \n·หากนาฬิกาโดนน้ำ กรุณาสะบัดน้ำตรงลำโพงของตัวเครื่องออกก่อนจึงค่อยใช้งานตามปกติ</string>
     <string name="saferecord_water_property_explain2">นาฬิกาสามารถกันน้ำ 20 เมตร ได้รับมาตรฐานการกันน้ำระดับประเทศ แต่ไม่เหมาะกับการสวมใส่อาบน้ำอุ่น/น้ำร้อน การดำน้ำลึก หรือกิจกรรมที่มีกระแสน้ำรวดเร็ว รายละเอียดเพิ่มเติมกรุณาปฏิบัติตามคำแนะนำในคู่มือการใช้งานอย่างเคร่งครัด</string>
     <string name="saferecord_water_property_explain3">นาฬิกามีความสามารถในการทนน้ำระดับ 20 เมตร ตามมาตรฐาน ISO 22810:2010 รองรับการกันน้ำในกิจกรรมน้ำตื้น (เช่น การว่ายน้ำในสระหรือทะเล) แต่ไม่สามารถสวมใส่ดำน้ำลึก เล่นสกีน้ำ หรือทำกิจกรรมอื่นๆ ที่เกี่ยวข้องกับน้ำที่มีความเร็วสูง หรือการนำไปแช่ใ</string>
 
@@ -2289,7 +2251,7 @@
 
 
     <string name="location_overtime_tip">สัญญาณอินเทอร์เน็ตบริเวณรอบๆนาฬิกาอ่อน ระบบจะแจ้งให้คุณทราบทันทีหลังจากมีการอัพเดตตำแหน่งแล้ว
-</string>
+    </string>
 
     <string name="location_google_service_error">กรุณาอัพเดตบริการGoogle Play เพื่อให้บริการตำแหน่งที่สมบูรณ์แก่คุณ</string>
 
@@ -3751,4 +3713,4 @@
     <string name="white_list_learn_more">ตรวจสอบรายละเอียด</string>
 
     <string name="home_nav_message">ข่าวสาร</string>
-
+</resources>

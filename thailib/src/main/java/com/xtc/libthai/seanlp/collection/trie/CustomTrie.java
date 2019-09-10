@@ -51,9 +51,10 @@ public class CustomTrie implements ITrie {
     @Override
     public boolean contains(String key) {
         boolean result = base != null && base.contains(key);
-//        if (result) {
-//            updateWord(key);
-//        }
+        if (enableSaveUsedWord && result) {
+            updateWord(key);
+        }
+
         return result;
     }
 
@@ -62,12 +63,20 @@ public class CustomTrie implements ITrie {
 
     }
 
+    private boolean enableSaveUsedWord = false;
+    private String usedWordSavePath;
+
+    public void enableSaveUsedWord(boolean isEnable, String savePath) {
+        enableSaveUsedWord = isEnable;
+        usedWordSavePath = savePath;
+    }
+
     /**
-     * 分词时，将使用到的词汇进行提取。下次就直接使用提取后的词汇，增加词汇利用率和匹配速度
+     * 分词时，提取使用到的词汇
+     * 用使用过的词汇替换词库，增加词汇利用率和匹配速度
      */
     private void updateWord(String key) {
-        String path = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-use.txt";
-
+        String path = usedWordSavePath;
         List<String> word = IOUtil.readLines(path);
 
         if (!word.contains(key)) {
@@ -76,10 +85,11 @@ public class CustomTrie implements ITrie {
     }
 
     /**
-     * 分词时，将使用到的词汇进行提取，并设置词频。下次就直接使用提取后的词汇，增加词汇利用率和匹配速度
+     * 分词时，提取使用到的词汇，并设置词频。
+     * 用使用过的词汇替换词库，增加词汇利用率和匹配速度
      */
     private void updateWordFrequency(String key) {
-        String path = "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/thai-use.txt";
+        String path = usedWordSavePath;
 
         List<String> word = IOUtil.readLines(path);
         String line = "";

@@ -5,7 +5,6 @@ import com.xtc.libthai.seanlp.collection.trie.CustomTrie;
 import com.xtc.libthai.seanlp.util.ByteArray;
 import com.xtc.libthai.seanlp.util.IOUtil;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,23 +41,7 @@ public class CustomDictionary implements Dictionary<CustomDictionary> {
         System.out.println(TAG + "自定义词典读入词条" + keyWord.size() + "，耗时" + (System.currentTimeMillis() - start) + "ms");
         coreDictionary.customTrie.build(keyWord);
 
-//        getNewWord(path, keyWord);
-
         return coreDictionary;
-    }
-
-    private static void getNewWord(String path, List<String> keyWord) {
-        String realPath = path + "/dictionary" + Config.FileExtensions.TXT;
-        List<String> words = loadCustomTxtDictionary(realPath);
-
-        List<String> newWord = new LinkedList<>();
-        for (String word : words) {
-            if (!keyWord.contains(word)) {
-                newWord.add(word);
-            }
-        }
-
-        IOUtil.saveCollectionToTxt(newWord, "C:/Code/GitHubProject/ThaiTest/thailib/src/main/resources/com/xtc/libthai/dictionary/Thai/tdict-new-word.txt");
     }
 
     /**

@@ -1,0 +1,10 @@
+//泰文断行的输入和输出文件名，不含文件后缀
+break_string_file:break_string
+break_result_file:break_result
+
+//新词条文件名
+new_word_file:new_word
+
+//需要去重的文件名
+repeat_string_file:repeat_string
+repeat_result_file:repeat_result

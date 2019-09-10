@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">ToolThai</string>
+
+    <string name="avchat_disable_during_class_note">%1sกำลังเรียน กรุณาอย่ารบกวน หากมีธุระด่วน กรุณาปิดโหมดห้ามใช้ขณะเรียนก่อน</string>
+
+    <string name="apply_info_tip">นาฬิกามีแอดมินแล้ว(<xliff:g id="adminName">%1s</xliff:g>)คุณต้องส่งคำขอจึงจะสามารถดูแลนาฬิกา</string>
+
+    <string name="submit_check_result_desc">การเชื่อมต่อเซิร์ฟเวอร์ผิดปกติ\nส่งผลการตรวจสอบให้เรา จะช่วยให้แก้ไขปัญหาอินเทอร์เน็ตของคุณได้ดีขึ้น</string>
+
+    <string name="watch_break_line_tip_content">
+        手表无网络原因：\n
+        1、手表关机；\n
+        2、手表欠费停机；\n
+        3、手表当前在网络不好的地方，失去信号；\n
+        4、手表进入预留应急电量模式；\n
+        如果以上情况都不是，你可以尝试重启手表或复位。</string>
+
+    <string-array name="contact_relations">
+        <item>คุณพ่อ</item>
+        <item>คุณแม่</item>
+        <item>น้องสาว</item>
+        <item>คุณปู่</item>
+    </string-array>
+
+</resources>

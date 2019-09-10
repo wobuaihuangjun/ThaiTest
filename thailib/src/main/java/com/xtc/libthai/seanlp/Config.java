@@ -176,6 +176,11 @@ public class Config {
          * 文本文件后缀名
          */
         public static final String TXT = ".txt";
+
+        /**
+         * 文本文件后缀名
+         */
+        public static final String XML = ".xml";
     }
 
     /**

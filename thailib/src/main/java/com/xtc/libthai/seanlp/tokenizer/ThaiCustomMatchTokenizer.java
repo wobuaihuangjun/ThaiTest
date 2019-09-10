@@ -1,7 +1,5 @@
 package com.xtc.libthai.seanlp.tokenizer;
 
-import android.text.TextUtils;
-
 import com.xtc.libthai.seanlp.Config;
 import com.xtc.libthai.seanlp.collection.trie.CustomTrie;
 import com.xtc.libthai.seanlp.dictionary.language.ThaiCustomDictionary;
@@ -15,10 +13,27 @@ import java.util.List;
 
 public class ThaiCustomMatchTokenizer {
 
-    public final static Segmenter customMatchSegmenter = new ThaiCustomMatchSegmenter();
+    private final static Segmenter customMatchSegmenter = new ThaiCustomMatchSegmenter();
 
     public static List<Term> customMaxSegment(String text) {
         return customMatchSegmenter.segment(text);
+    }
+
+    /**
+     * 已使用的词汇记录，开启
+     * @param savePath 记录词汇的文件路径
+     */
+    public static void enableSaveUsedWord(String savePath) {
+        CustomTrie customTrie = ThaiCustomDictionary.customDictionary.customTrie;
+        customTrie.enableSaveUsedWord(true, savePath);
+    }
+
+    /**
+     * 已使用词汇记录，关闭
+     */
+    public static void disenableSaveUsedWord() {
+        CustomTrie customTrie = ThaiCustomDictionary.customDictionary.customTrie;
+        customTrie.enableSaveUsedWord(false, null);
     }
 
     /**
@@ -50,13 +65,13 @@ public class ThaiCustomMatchTokenizer {
 
         String newWordPath = IOUtil.getCurrentFilePath() + "/OperationFile/add_word" + Config.FileExtensions.TXT;
         IOUtil.saveCollectionToTxt(addWords, newWordPath);
-        System.out.println("新增词条文件生成 完成，耗时: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("新增词条文件生成 完成，path:" + newWordPath + "，耗时: " + (System.currentTimeMillis() - start) + "ms");
 
         String allWordPath = IOUtil.getCurrentFilePath() + "/OperationFile/all_word" + Config.FileExtensions.TXT;
         keyWord.addAll(addWords);
         IOUtil.saveCollectionToTxt(keyWord, allWordPath);
 
-        System.out.println("总的词条文件生成 完成，耗时: " + (System.currentTimeMillis() - start) + "ms");
+        System.out.println("总的词条文件生成 完成，path:" + allWordPath + "，耗时: " + (System.currentTimeMillis() - start) + "ms");
     }
 
 }

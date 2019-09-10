@@ -1,6 +1,5 @@
 package com.xtc.libthai.tool;
 
-import com.xtc.libthai.seanlp.Config;
 import com.xtc.libthai.seanlp.SeanlpThai;
 import com.xtc.libthai.seanlp.util.IOUtil;
 
@@ -56,7 +55,7 @@ public class FileOperation {
 
     public static void breakThaiTextBatch(String inputFileName, String outputFileName) {
 
-        String inputPath = Operation_Path + inputFileName + Config.FileExtensions.TXT;
+        String inputPath = Operation_Path + inputFileName;
         long start = System.currentTimeMillis();
 
         List<String> stringList = IOUtil.readLines(inputPath);
@@ -67,7 +66,7 @@ public class FileOperation {
             newList.add(result);
         }
 
-        String outputPath = Operation_Path + outputFileName + Config.FileExtensions.TXT;
+        String outputPath = Operation_Path + outputFileName;
         IOUtil.overwriteLines(outputPath, newList);
 
         System.out.println("泰文批量分词 完成，耗时: " + (System.currentTimeMillis() - start) + "ms");
@@ -84,7 +83,7 @@ public class FileOperation {
      * 移除文件中重复的数据行
      */
     public static void removeRepeatString(String inputFileName, String outputFileName) {
-        String inputPath = Operation_Path + inputFileName + Config.FileExtensions.TXT;
+        String inputPath = Operation_Path + inputFileName;
         List<String> stringList = IOUtil.readLines(inputPath);
 
         List<String> newList = new LinkedList<>();
@@ -94,10 +93,42 @@ public class FileOperation {
                 newList.add(str);
             }
         }
-        String outputPath = Operation_Path + outputFileName + Config.FileExtensions.TXT;
+        String outputPath = Operation_Path + outputFileName;
         IOUtil.overwriteLines(outputPath, newList);
     }
 
+    /**
+     * Android string文件转换为纯粹的txt文件。
+     */
+    public static void androidStringXmlToTxt(String inputFileName, String outputFileName) {
+        File inputXml = new File(FileOperation.Operation_Path + inputFileName);
+        SAXReader saxReader = new SAXReader();
+
+        List<String> stringList = new ArrayList<>();
+
+        try {
+            Document document = saxReader.read(inputXml);
+            Element rootElement = document.getRootElement();
+            for (Iterator iterator = rootElement.elementIterator(); iterator.hasNext(); ) {
+                Element employee = (Element) iterator.next();
+
+                String name = employee.getQualifiedName();
+                if ("string".equals(name)) {
+                    String valueName = employee.attributeValue("name");
+                    String value = employee.getStringValue();
+                    System.out.println(name + "---" + valueName + "---" + value);
+                    stringList.add(value);
+                } else {
+                    System.out.println("unknown type. type:" + name);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        IOUtil.saveCollectionToTxt(stringList, FileOperation.Operation_Path + outputFileName);
+    }
 
     /**
      * 解析xml文件
@@ -150,7 +181,7 @@ public class FileOperation {
                     xmlStringArray.setItem(items);
                     stringArrayList.add(xmlStringArray);
                 } else {
-                    System.out.println("unknown type");
+                    System.out.println("unknown type. type:" + name);
                 }
             }
         } catch (DocumentException e) {
